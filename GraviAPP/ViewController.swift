@@ -2,33 +2,25 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    var isMenuVisible = false
-        
-    @IBOutlet var label: UILabel!
-    @IBOutlet var slider: UISlider!
+    @IBOutlet var percentLabel: UILabel!
+    @IBOutlet var levelLabel: UILabel!
+    
     @IBOutlet var progress: UIProgressView!
+    
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        progress.progress = (slider.value/100.0)
-        label.text = "\(String(Int(progress.progress*100)))%"
+        fetchClanXP()
     }
     
-    @IBAction func changeLabel(_ sender: UISlider){
-        progress.progress = (slider.value/100.0)
-        label.text = "\(String(Int(progress.progress*100)))%"
-    }
-    
-    @IBAction func makeHTTPRequest(_ sender: UIButton) {
-        // 1. Créer une URL pour la requête
+    @IBAction func fetchClanXP() {
+        activityIndicator.startAnimating()
         guard let url = URL(string: "https://gravityclan.fr/api/bot/clanxp.php") else {
             print("URL invalide.")
             return
         }
-        
-        // 2. Créer une URLSession
         let session = URLSession.shared
-        
         // 3. Créer une tâche de données pour la requête
         let task = session.dataTask(with: url) { (data, response, error) in
             // Vérifier s'il y a des erreurs
@@ -43,15 +35,26 @@ class ViewController: UIViewController {
                 return
             }
             
-            do {
-                let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
-                print(jsonObject)
-            } catch {
-                print("Erreur lors du traitement des données JSON : \(error.localizedDescription)")
+            let json = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let dict = json as? [String: Any] {
+                DispatchQueue.main.async {
+                    if let number = dict["percent"] as? Double, let xp = dict["xp"] as? Int {
+                        self.percentLabel.text = "\(number)% (\(xp) / 125000)"
+                        UIView.animate(withDuration: 0.5, delay: 0.0, animations: {
+                            self.progress.setProgress(Float(number)/100.0, animated: true)
+                        })
+                    }
+                    if let level = dict["level"] as? Int {
+                        self.levelLabel.text = "Level \(String(level))"
+                    }
+                    self.activityIndicator.stopAnimating()
+                }
+                
             }
         }
         
         // 4. Lancer la tâche de données pour effectuer la requête
         task.resume()
     }
+    
 }
