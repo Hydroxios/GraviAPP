@@ -2,12 +2,21 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    let menuView = UIView()
-    let menuWidth: CGFloat = 200.0
     var isMenuVisible = false
         
+    @IBOutlet var label: UILabel!
+    @IBOutlet var slider: UISlider!
+    @IBOutlet var progress: UIProgressView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        progress.progress = (slider.value/100.0)
+        label.text = "\(String(Int(progress.progress*100)))%"
+    }
+    
+    @IBAction func changeLabel(_ sender: UISlider){
+        progress.progress = (slider.value/100.0)
+        label.text = "\(String(Int(progress.progress*100)))%"
     }
     
     @IBAction func makeHTTPRequest(_ sender: UIButton) {

@@ -445,9 +445,12 @@
 				DEVELOPMENT_TEAM = G333244V77;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GraviAPP/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = GraviAPP;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -473,9 +476,12 @@
 				DEVELOPMENT_TEAM = G333244V77;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = GraviAPP/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = GraviAPP;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
